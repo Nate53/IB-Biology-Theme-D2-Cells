@@ -1112,6 +1112,44 @@ function TextbookReference({ referenceKey, lang }) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
+// DIVE DEEPER — cross-reference callout to companion apps
+// ═══════════════════════════════════════════════════════════════════
+function DiveDeeper({ lang, apps }) {
+  return (
+    <div className="mt-4 p-4 bg-gradient-to-r from-brand-50 to-green-50 border border-brand-200 rounded-xl">
+      <div className="flex items-center gap-2 mb-2">
+        <GraduationCap className="w-5 h-5 text-brand-700" />
+        <h3 className="text-sm font-bold text-brand-800 uppercase tracking-wide">
+          {lang === 'en' ? '🔗 Dive Deeper' : '🔗 Profundiza Más'}
+        </h3>
+      </div>
+      <p className="text-xs text-gray-600 mb-3">
+        {lang === 'en'
+          ? 'Explore these companion apps for more in-depth practice and simulations:'
+          : 'Explora estas aplicaciones complementarias para practicar y simular más a fondo:'}
+      </p>
+      <div className="flex flex-col gap-2">
+        {apps.map(({ name, url, desc }) => (
+          <a
+            key={url}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:border-brand-400 hover:shadow-md transition-all group"
+          >
+            <div className="flex-1">
+              <span className="text-sm font-semibold text-brand-700 group-hover:text-brand-800">{name}</span>
+              <p className="text-xs text-gray-500 mt-0.5">{desc}</p>
+            </div>
+            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-brand-600 flex-shrink-0" />
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // INTERACTIVE: MITOSIS CELL CYCLE VISUALIZER
 // ═══════════════════════════════════════════════════════════════════
 function MitosisCycleVisualizer({ lang }) {
@@ -1771,6 +1809,9 @@ export default function App() {
               </div>
               <MitosisCycleVisualizer lang={lang} />
               <TextbookReference referenceKey="textbookRef1" lang={lang} />
+              <DiveDeeper lang={lang} apps={[
+                { name: lang === 'en' ? 'Mitosis Explorer' : 'Explorador de Mitosis', url: 'https://mitosis-explorer.vercel.app', desc: lang === 'en' ? 'Interactive walkthrough of mitosis stages with detailed visuals and animations' : 'Recorrido interactivo de las etapas de la mitosis con visuales detallados y animaciones' },
+              ]} />
               <ConceptCheckMCQ
                 question={t('chunk1CC1Question', lang)}
                 options={t('chunk1CC1Options', lang)}
@@ -1813,6 +1854,9 @@ export default function App() {
                   <ContentRenderer text={t('chunk3Content', lang)} />
                 </div>
                 <TextbookReference referenceKey="textbookRef3" lang={lang} />
+                <DiveDeeper lang={lang} apps={[
+                  { name: lang === 'en' ? 'Cell Cycle Interactive Model' : 'Modelo Interactivo del Ciclo Celular', url: 'https://cell-cycle-interactive-model.vercel.app', desc: lang === 'en' ? 'Explore checkpoints, cyclins, CDKs, and how the cell cycle is regulated step by step' : 'Explora los puntos de control, ciclinas, CDKs y cómo se regula el ciclo celular paso a paso' },
+                ]} />
                 <ConceptCheckMCQ
                   question={t('chunk3CC1Question', lang)}
                   options={t('chunk3CC1Options', lang)}
@@ -1871,6 +1915,9 @@ export default function App() {
                 <ContentRenderer text={t('chunk6Content', lang)} />
               </div>
               <TextbookReference referenceKey="textbookRef6" lang={lang} />
+              <DiveDeeper lang={lang} apps={[
+                { name: lang === 'en' ? 'Water Potential & Tonicity' : 'Potencial Hídrico y Tonicidad', url: 'https://water-potential-and-tonicity.vercel.app', desc: lang === 'en' ? 'Interactive simulations of water potential, osmosis, and tonicity in plant and animal cells' : 'Simulaciones interactivas de potencial hídrico, ósmosis y tonicidad en células vegetales y animales' },
+              ]} />
               <ConceptCheckShortAnswer
                 question={t('chunk6CC1Question', lang)}
                 answer={t('chunk6CC1Answer', lang)}
